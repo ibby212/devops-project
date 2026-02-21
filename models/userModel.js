@@ -8,4 +8,12 @@ const createUser = async (name, email) => {
     return result.rows[0];
 };
 
-module.exports = { createUser };
+// NEW: Function to get all users
+const getUsers = async () => {
+    const query = 'SELECT * FROM users;';
+    const result = await pool.query(query);
+    return result.rows;
+};
+
+// Make sure to export both!
+module.exports = { createUser, getUsers };
