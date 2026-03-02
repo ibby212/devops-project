@@ -1,0 +1,29 @@
+name: Update Comment Workflow
+
+on:
+  # Triggers the workflow when a new comment is created on an issue or pull request
+  issue_comment:
+    types: [created]
+
+jobs:
+  update-comment:
+    runs-on: ubuntu-latest
+    
+    # Required permissions to update comments in the repository
+    permissions:
+      pull-requests: write
+      issues: write
+
+    steps:
+      - name: Update comment using "pete" (peter-evans)
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          # Targets the exact comment that triggered the workflow
+          comment-id: ${{ github.event.comment.id }}
+          
+          # The new body text for the comment
+          body: |
+            This comment was automatically updated by the GitHub Actions workflow using peter-evans!
+          
+          # Adds a reaction to the comment
+          reactions: rocket
