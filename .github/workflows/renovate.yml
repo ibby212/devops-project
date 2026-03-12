@@ -21,5 +21,7 @@ jobs:
         uses: renovatebot/github-action@v40.1.3
         with:
           configurationFile: renovate.json
-          # Uses the default GitHub token to create the Pull Requests
           token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          # This tells the bot to run specifically on your repository!
+          RENOVATE_REPOSITORIES: ${{ github.repository }}
